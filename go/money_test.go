@@ -27,6 +27,21 @@ func assertEqual(t *testing.T, expected Money, actual Money) {
 	}
 }
 
+type Portifolio []Money
+
+func (p Portifolio) Add(money Money) Portifolio {
+	p = append(p, money)
+	return p
+}
+
+func (p Portifolio) Evaluate(currency string) Money {
+	total := 0.0
+	for _, m := range p {
+		total += m.amount
+	}
+	return Money{amount: total, currency: currency}
+}
+
 func TestMultiplicationInDollars(t *testing.T) {
 	fiver := Money{amount: 5, currency: "USD"}
 	actualResult := fiver.Times(2)
@@ -46,4 +61,19 @@ func TestDivision(t *testing.T) {
 	actualResult := originalMoney.Divide(4)
 	expectedResult := Money{amount: 1000.5, currency: "KRW"}
 	assertEqual(t, expectedResult, actualResult)
+}
+
+func TestAddition(t *testing.T) {
+	var portifolio Portifolio
+	var portifolioInDollars Money
+
+	fiveDollars := Money{amount: 5, currency: "USD"}
+	tenDollars := Money{amount: 10, currency: "USD"}
+	fifteenDollars := Money{amount: 15, currency: "USD"}
+
+	portifolio = portifolio.Add(fiveDollars)
+	portifolio = portifolio.Add(tenDollars)
+	portifolioInDollars = portifolio.Evaluate("USD")
+
+	assertEqual(t, fifteenDollars, portifolioInDollars)
 }
