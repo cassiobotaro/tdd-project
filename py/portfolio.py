@@ -1,12 +1,10 @@
-import functools
-import operator
-
 from money import Money
+
 
 class Portfolio:
     def __init__(self):
         self.moneys = []
-    
+
     def add(self, *moneys):
         self.moneys.extend(moneys)
 
@@ -21,4 +19,4 @@ class Portfolio:
         if len(failures) == 0:
             return Money(total, currency)
         failureMessage = ",".join(f.args[0] for f in failures)
-        raise Exception("Missing exchange rate(s):["+ failureMessage +"]" )
+        raise Exception("Missing exchange rate(s):[" + failureMessage + "]" )
