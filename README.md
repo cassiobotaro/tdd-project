@@ -2,7 +2,7 @@
 
 🚦 Códigos do livro: Learning test-driven development
 
-## Pré requisitos
+## Pré-requisitos
 
 Será necessário  a instalação do [Go](https://golang.org/), [Node.js](https://nodejs.org/en/), e do [Python 3](https://www.python.org/) para executar o código deste repositório.
 
