@@ -2,31 +2,30 @@ package stocks
 
 import "errors"
 
-type Portifolio []Money
+type Portfolio []Money
 
-func (p Portifolio) Add(money Money) Portifolio {
+func (p Portfolio) Add(money Money) Portfolio {
 	p = append(p, money)
 	return p
 }
 
-func (p Portifolio) Evaluate(bank Bank, currency string) (*Money, error) {
-	total := 0.0
+func (p Portfolio) Evaluate(bank Bank, currency string) (*Money, error) {
+	totalMoney := NewMoney(0, currency)
 	failedConversions := make([]string, 0)
 	for _, m := range p {
-		if convertedCurrency, err := bank.Convert(m, currency); err == nil {
-			total += convertedCurrency.amount
+		if convertedMoney, err := bank.Convert(m, currency); err == nil {
+			totalMoney = *totalMoney.Add(convertedMoney)
 		} else {
 			failedConversions = append(failedConversions, err.Error())
 		}
 	}
 	if len(failedConversions) == 0 {
-		totalMoney := NewMoney(total, currency)
 		return &totalMoney, nil
 	}
 	failures := "["
 	for _, f := range failedConversions {
-		failures += f + ","
+		failures = failures + f + ","
 	}
-	failures += "]"
+	failures = failures + "]"
 	return nil, errors.New("Missing exchange rate(s):" + failures)
 }

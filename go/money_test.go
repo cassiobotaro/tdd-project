@@ -35,7 +35,7 @@ func TestDivision(t *testing.T) {
 }
 
 func TestAddition(t *testing.T) {
-	var portifolio s.Portifolio
+	var portifolio s.Portfolio
 
 	fiveDollars := s.NewMoney(5, "USD")
 	tenDollars := s.NewMoney(10, "USD")
@@ -51,7 +51,7 @@ func TestAddition(t *testing.T) {
 
 func TestAdditionOfDollarsAndEuros(t *testing.T) {
 	initExchangeRates()
-	var portfolio s.Portifolio
+	var portfolio s.Portfolio
 
 	fiveDollars := s.NewMoney(5, "USD")
 	tenEuros := s.NewMoney(10, "EUR")
@@ -68,7 +68,7 @@ func TestAdditionOfDollarsAndEuros(t *testing.T) {
 
 func TestAdditionOfDollarsAndWons(t *testing.T) {
 	initExchangeRates()
-	var portfolio s.Portifolio
+	var portfolio s.Portfolio
 
 	oneDollar := s.NewMoney(1, "USD")
 	elevenHundredWon := s.NewMoney(1100, "KRW")
@@ -85,7 +85,7 @@ func TestAdditionOfDollarsAndWons(t *testing.T) {
 
 func TestAdditionWithMultipleMissingExchageRates(t *testing.T) {
 	initExchangeRates()
-	var portfolio s.Portifolio
+	var portfolio s.Portfolio
 
 	oneDollar := s.NewMoney(1, "USD")
 	oneEuro := s.NewMoney(1, "EUR")

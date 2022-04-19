@@ -19,6 +19,15 @@ func (m Money) Divide(divisor int) Money {
 	}
 }
 
+func (m Money) Add(other *Money) *Money {
+	var result Money
+	if m.currency == other.currency {
+		result = Money{amount: m.amount + other.amount, currency: m.currency}
+		return &result
+	}
+	return nil
+}
+
 func NewMoney(amount float64, currency string) Money {
 	return Money{
 		amount:   amount,

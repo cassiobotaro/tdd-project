@@ -12,5 +12,11 @@ class Money:
     def divide(self, divisor):
         return Money(self.amount / divisor, self.currency)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"{self.currency} {self.amount:0.2f}"
+    
+    def __add__(self, a):
+        if a is not None and self.currency == a.currency:
+            return Money(self.amount + a.amount, self.currency)
+        else:
+            return None

@@ -11,9 +11,10 @@ class Bank:
 
     def convert(self, aMoney, aCurrency):
         if aMoney.currency == aCurrency:
-            return aMoney
+            return Money(aMoney.amount, aCurrency), None
 
         key = aMoney.currency + "->" + aCurrency
         if key in self.exchangeRates:
-            return Money(aMoney.amount * self.exchangeRates[key], aCurrency)
-        raise Exception(key)
+            return Money(aMoney.amount * self.exchangeRates[key], aCurrency), None
+
+        return None, key
